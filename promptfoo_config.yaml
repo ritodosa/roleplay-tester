@@ -1,0 +1,40 @@
+description: "Roleplay Prompt Test"
+
+providers:
+  - label: google:gemini-2.5-flash
+    id: google:gemini-2.5-flash
+    config:
+      timeout: 300000
+      temperature: 0.75
+  - label: openrouter:x-ai/grok-4.1-fast:free
+    id: openrouter:x-ai/grok-4.1-fast:free
+    config:
+      timeout: 300000
+      temperature: 0.75
+
+prompts:
+  - label: Autopilot Prompt v1
+    id: file://prompts/full_prompt_A.md
+  - label: Roleplay Prompt v1
+    id: file://prompts/full_prompt_B.md
+
+defaultTest:
+  vars:
+    char: John
+    user: Mary
+    char_persona: file://persona_char/JohnDoe.md
+    user_persona: file://persona_user/MarySue.md
+    prompt_A: file://prompts/prompt_A.md
+    prompt_B: file://prompts/prompt_B.md
+
+tests:
+  - description: "Questioning the spray"
+    vars:
+      first_msg: file://test_cases/campsite_trip/first_msg.txt
+      user_input: file://test_cases/campsite_trip/reply_questioning_the_spray.txt
+  - description: "Spider threat"
+    vars:
+      first_msg: file://test_cases/campsite_trip/first_msg.txt
+      user_input: file://test_cases/campsite_trip/reply_spider_threat.txt
+
+outputPath: ./test_results/roleplay_evaluation.html
